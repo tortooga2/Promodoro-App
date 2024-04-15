@@ -1,9 +1,8 @@
-import { MongoClient } from "mongodb";
-
+import { MongoClient, ServerApiVersion } from 'mongodb';
 import dotenv from 'dotenv'
 dotenv.config()
 
-const db = MongoClient.connect()
+
 
 
 class MDBController{
@@ -29,13 +28,17 @@ class MDBController{
         }
     }
 
-
-    getByKey = (key) =>{
-             
+    isConnected() {
+        return !!this.client && !!this.client.topology && this.client.topology.isConnected()
     }
 
-    add_value = () => {
-        
+    getDBStatus = async () => {
+        try {
+            let status = await this.client.db("Cluster0").serverConfig.isConnected();
+            return status;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }

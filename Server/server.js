@@ -1,20 +1,20 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { MongoClient, ServerApiVersion } from 'mongodb';
-import MDBController from './Controller/mdb';
+import MDBController from './Controller/mdb.js';
 
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-const mdb = MDBController();
+const mdb = new MDBController();
 
 
 
 app.get('/', (req, res)=>{
     console.log("Server Healthy!");
-    res.status(200).send("Heard Response");
+    res.status(200).send("Heard Response: " + mdb.isConnected());
 });
 
 
