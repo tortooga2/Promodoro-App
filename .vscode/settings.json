@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "database-1.cjge22ec0jiy.us-east-2.rds.amazonaws.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "test-db",
+            "database": "database-1",
+            "username": "master",
+            "password": "chasenagle"
+        }
+    ]
+}
