@@ -2,28 +2,37 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import MDBController from './Controller/mdb.js';
+import {connectDB, getClient, checkConnection} from './Controller/controller.mdb.js';
+import signUpRouter from './Modules/Module.signup.js';
+
+
+
 
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-const mdb = new MDBController();
 
+let client;
+
+connectDB().then( () => { client = getClient() }).catch((error) => {throw error});
 
 
 app.get('/', (req, res)=>{
     console.log("Server Healthy!");
-    res.status(200).send("Heard Response: " + mdb.isConnected());
+    res.status(200).send("Heard Response: " + checkConnection());
 });
 
 
+app.use('/signup', signUpRouter);
 
 const RunningCallback = () => {
     console.log(`Server Running on Port ${process.env.PORT}`);
 }
 
 app.listen(process.env.PORT, RunningCallback);
+
 
 
 // app.get('/server', async (req, res) => {

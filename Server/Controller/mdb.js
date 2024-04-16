@@ -28,19 +28,16 @@ class MDBController{
         }
     }
 
-    isConnected() {
+    checkConnection() {
         return !!this.client && !!this.client.topology && this.client.topology.isConnected()
     }
 
-    getDBStatus = async () => {
-        try {
-            let status = await this.client.db("Cluster0").serverConfig.isConnected();
-            return status;
-        } catch (error) {
-            console.log(error);
-        }
+    getDB(){
+        return this.client.db(process.env.MONGO_DB);
     }
 
 }
+
+
 
 export default MDBController;
