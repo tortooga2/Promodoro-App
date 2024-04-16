@@ -30,6 +30,22 @@ class SignUpController{
         });
 
     };
+
+
+    isUserCreatedbyUsername = async (newUserJson, client) => {
+        let user = await client.db(process.env.MONGO_USER_DB).collection("users").findOne({email: newUserJson.username});
+        if(user){
+            return true;
+        }
+        return false;
+    }
+    isUserCreatedbyEmail = async (newUserJson, client) => {
+        let user = await client.db(process.env.MONGO_USER_DB).collection("users").findOne({email: newUserJson.email});
+        if(user){
+            return true;
+        }
+        return false;
+    }
 }
 
 export default SignUpController;
