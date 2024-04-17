@@ -16,6 +16,8 @@ signUpRouter.post('/createUser', async (req, res) => {
     
     let client = getClient();
     console.log("Client: " + client);
+
+    
     let user = await signUpController.isUserCreatedbyUsername(req.body, client);
     let email = await signUpController.isUserCreatedbyEmail(req.body, client);
     if(user){
