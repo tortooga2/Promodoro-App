@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import bycrypt from "bcrypt";
+import { z } from "zod";
 
 
 
@@ -8,6 +9,13 @@ import bycrypt from "bcrypt";
 const saltRounds = 10;
 
 class SignUpController{
+    infoSchema = z.object({ 
+        username: z.string(),
+        password: z.string(),
+        email: z.string()
+    
+    });
+
     createUser = async (infoJSON, client) => { 
         let newUser = {
             username: "",
