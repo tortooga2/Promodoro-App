@@ -5,6 +5,7 @@ let client;
 
 export async function connectDB(){
     if(!client){
+        console.log("Attempting to Connect to Database");
         client = new MongoClient(process.env.MONGO_URI, {
             serverApi: {
                 version: ServerApiVersion.v1,

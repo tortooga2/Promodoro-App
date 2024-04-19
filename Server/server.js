@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import MDBController from './Controller/mdb.js';
 import {connectDB, getClient, checkConnection} from './Controller/controller.mdb.js';
-import signUpRouter from './Modules/Module.signup.js';
+import signUpRouter from './Modules/module.signup.js';
 import loginRouter from './Modules/module.login.js';
 
 
