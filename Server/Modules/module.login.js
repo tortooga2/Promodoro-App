@@ -16,7 +16,7 @@ const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email format." }),
 });
 
-loginRouter.post("/", async (req, res) => {
+loginRouter.post("/loggingin", async (req, res) => {
   let loginInfo;
   try {
     loginInfo = loginSchema.parse(req.body);
