@@ -16,11 +16,13 @@ class LoginController {
     } else {
       let result = await bycrypt.compare(password, user.password);
       console.log(result);
-      // if (result) {
-      //   return user.id;
-      // } else {
-      //   return null;
-      // }
+      if (result) {
+        return user.userID;
+      } else {
+        return null;
+      }
     }
   };
 }
+
+export default LoginController;

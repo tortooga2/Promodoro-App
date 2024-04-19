@@ -4,6 +4,7 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 import MDBController from './Controller/mdb.js';
 import {connectDB, getClient, checkConnection} from './Controller/controller.mdb.js';
 import signUpRouter from './Modules/Module.signup.js';
+import loginRouter from './Modules/module.login.js';
 
 
 
@@ -26,6 +27,7 @@ app.get('/', (req, res)=>{
 
 
 app.use('/signup', signUpRouter);
+app.use('/login', loginRouter);
 
 const RunningCallback = () => {
     console.log(`Server Running on Port ${process.env.PORT}`);
