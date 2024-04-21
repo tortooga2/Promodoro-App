@@ -25,7 +25,6 @@ export async function connectDB(){
 
 export function checkConnection(){
     return !!client && !!client.topology && client.topology.isConnected()
-
 }
 
 export function getClient(){
