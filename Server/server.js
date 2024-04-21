@@ -1,14 +1,9 @@
 import express from 'express';
-//import HTTPS from 'https';
+//import HTTPS from 'https'; //for https
 //import helmet from 'helmet';
 //import fs from 'fs';
 import dotenv from 'dotenv';
 import { MongoClient, ServerApiVersion } from 'mongodb';
-<<<<<<< HEAD
-//import MDBController from './Controller/mdb.js'; //Depricated
-=======
-//import MDBController from './Controller/mdb(Depricated).js';
->>>>>>> 00e8dcfb824fcadcb54adf4383edaa0b00cec415
 import {connectDB, getClient, checkConnection} from './Controller/controller.mdb.js';
 import signUpRouter from './Modules/module.signup.js';
 import loginRouter from './Modules/module.login.js';
