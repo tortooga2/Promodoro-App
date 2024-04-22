@@ -6,7 +6,6 @@ import {connectDB, getClient, checkConnection} from './Controller/controller.mdb
 import signUpRouter from './Modules/module.signup.js';
 import loginRouter from './Modules/module.login.js';
 
-
 dotenv.config();
 
 const app = express();
@@ -15,7 +14,6 @@ app.use(express.json());
 let client;
 
 connectDB().then( () => { client = getClient() }).catch((error) => {throw error});
-
 
 app.get('/', (req, res)=>{
     console.log("Server Healthy!");
