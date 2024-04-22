@@ -6,8 +6,8 @@ class JWTController {
     }
     
     createJWT = async (payload) => {
-        const token = await jose.SignJWT(payload)
-        .setProtectedHeader({ alg: 'ES256' })
+        const token = await new jose.SignJWT(payload)
+        .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
         .setExpirationTime('2d')
         .sign(this.secret);
