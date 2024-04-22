@@ -2,7 +2,13 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import bycrypt from "bcrypt";
 
+import JWTController from "./controller.jwt.js";
+
 class LoginController {
+  constructor() {
+    this.JWTController = new JWTController({ secret: process.env.JWT_SECRET });
+  }
+
   usernameLogin = async (loginInfo, client) => {
     const username = loginInfo.username;
     const password = loginInfo.password;
@@ -17,7 +23,7 @@ class LoginController {
       let result = await bycrypt.compare(password, user.password);
       console.log(result);
       if (result) {
-        return user.userID;
+        return this.JWTController.createJWT({ clientID: user.userID });
       } else {
         return null;
       }
