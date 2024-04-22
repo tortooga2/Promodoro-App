@@ -1,7 +1,9 @@
 import express from 'express';
+//import HTTPS from 'https'; //for https
+//import helmet from 'helmet';
+//import fs from 'fs';
 import dotenv from 'dotenv';
 import { MongoClient, ServerApiVersion } from 'mongodb';
-//import MDBController from './Controller/mdb(Depricated).js';
 import {connectDB, getClient, checkConnection} from './Controller/controller.mdb.js';
 import signUpRouter from './Modules/module.signup.js';
 import loginRouter from './Modules/module.login.js';
@@ -10,6 +12,12 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+//app.use(helmet());
+
+// const options = {
+//     key: fs.readFileSync(process.env.KEY),
+//     cert: fs.readFileSync(process.env.CERT)
+// }
 
 let client;
 
@@ -26,6 +34,8 @@ app.use('/login', loginRouter);
 const RunningCallback = () => {
     console.log(`Server Running on Port ${process.env.PORT}`);
 }
+
+//const server = HTTPS.createServer(options, app);
 
 app.listen(process.env.PORT, RunningCallback);
 

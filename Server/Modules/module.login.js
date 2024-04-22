@@ -16,7 +16,9 @@ const loginSchema = z.object({
 });
 
 loginRouter.post("/loggingin", async (req, res) => {
+
   let loginInfo;
+
   try {
     loginInfo = loginSchema.parse(req.body);
   } catch (error) {
@@ -24,17 +26,24 @@ loginRouter.post("/loggingin", async (req, res) => {
     console.log("failed to parse infoJSON");
     return res.status(400).send("Invalid Input");
   }
+
   let client = getClient();
-  if (loginInfo.username) { //TODO: Add Email Login - notice zod test file.
-    const result = await loginServer.usernameLogin(loginInfo, client); //loginServer is an instance of the LoginController class
-    console.log(result);
-    if(result != null){ //null is returned if the password is incorrect
-      res.status(200).send("Login Successful. User ID: " + result);
-    }
-    else{
-      res.status(400).send("Login Failed");
-    }
+
+  if (!loginInfo.username) { //TODO: Add Email Login - notice zod test file.
+    return res.status(400).send("Invalid Input");
+    
   }
+
+  const result = await loginServer.usernameLogin(loginInfo, client); //loginServer is an instance of the LoginController class
+  console.log(result); //Debugging
+
+  if(result != null){ //null is returned if the password is incorrect
+    return res.status(200).send("Login Successful. User ID: " + result);
+  }
+  else{
+    return res.status(400).send("Login Failed");
+  }
+
 });
 
 export default loginRouter;
