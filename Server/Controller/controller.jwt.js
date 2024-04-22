@@ -17,7 +17,7 @@ class JWTController {
     varifyJWT = async (token) => {
         
         let result = await jose.jwtVerify(token, this.secret);
-        return result;    
+        return result;
         console.log(error);
         return null;
     }
