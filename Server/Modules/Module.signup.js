@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { z } from "zod";
-import SignUpController from "../Controller/controller.signup.js";
+import SignUpController from "../Controller/Auth/controller.signup.js";
 
 import { getClient } from "../Controller/controller.mdb.js";
 

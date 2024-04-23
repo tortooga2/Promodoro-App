@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { z } from "zod";
-import LoginController from "../Controller/controller.login.js";
+import LoginController from "../Controller/Auth/controller.login.js";
 import { getClient } from "../Controller/controller.mdb.js";
 
 dotenv.config();
