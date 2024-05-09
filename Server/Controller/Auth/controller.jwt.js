@@ -9,7 +9,7 @@ class JWTController {
         const token = await new jose.SignJWT(payload)
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setExpirationTime('2d')
+        .setExpirationTime('1d')
         .sign(this.secret);
         return token;
     }
