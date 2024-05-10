@@ -97,3 +97,4 @@ export const Project = mongoose.model('Project', ProjectSchema);
 //TODO: Create Function to get Users Projects. 
 //TODO: Create Function to get Users Notes relative to Project.
 //TODO: Create Function to get Users Notes relative to Tag.
+//TODO: Create Function to get Users Notes relative to Date.
