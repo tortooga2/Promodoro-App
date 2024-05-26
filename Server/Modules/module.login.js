@@ -32,7 +32,7 @@ loginRouter.post("/loggingin", async (req, res) => {
   if (result != null) {
     //null is returned if the password is incorrect
     console.log("Login Successful");
-    return res.status(200).send("Login Successful. User ID: " + result);
+    return res.status(200).send("Login Successful. User ID: " + result); //TODO: DEBUGING
   } else {
     console.log("Failed attempt to login");
     return res.status(400).send("Login Failed");
