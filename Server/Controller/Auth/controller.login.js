@@ -18,15 +18,15 @@ class LoginController {
       .collection("users")
       .findOne({ username: username });
     if (user == null) {
-      return "no user found";
+      console.log("No User was found by username");
+      return null;
     } else {
       let result = await bycrypt.compare(password, user.password);
-      console.log(result);
       if (result) {
+        console.log("User login was varified by Bcrypt");
         return this.JWTController.createJWT({ clientID: user.userID });
-      } else {
-        return null;
       }
+      return null;
     }
   };
 }

@@ -1,27 +1,14 @@
 import { MongoClient } from "mongodb";
 import bycrypt from "bcrypt";
 import { z } from "zod";
+import { signUpSchema } from "../../Schema/schema.loginInfo.js";
 
 //infoJSON should have the fallowing properties: username, password, email
 const saltRounds = 10;
 
-const infoSchema = z.object({
-  username: z.string(),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter",
-    })
-    .regex(/[^A-Za-z0-9]/, {
-      message: "Password must contain at least one special character.",
-    }),
-  email: z.string().email({ message: "Invalid email format." }),
-});
-
 const createSchema = (i) => {
   try {
-    let newUser = infoSchema.parse(i);
+    let newUser = signUpSchema.parse(i);
     return newUser;
   } catch (error) {
     console.log(error);
@@ -44,7 +31,6 @@ class SignUpController {
     salt = await bycrypt.genSalt(saltRounds);
     newUser.userID = await bycrypt.hash(newUser.username, salt);
 
-    console.log(newUser);
     client
       .db(process.env.MONGO_USER_DB)
       .collection("users")
@@ -60,19 +46,23 @@ class SignUpController {
       .collection("users")
       .findOne({ username: username });
     if (user == null) {
+      console.log("No User was found by username");
       return false;
     }
+    console.log("User was found by username");
     return true;
   };
+
   isUserCreatedbyEmail = async (email, client) => {
     let user = await client
       .db(process.env.MONGO_USER_DB)
       .collection("users")
       .findOne({ email: email });
-    console.log(user);
     if (user == null) {
+      console.log("No User was found by email.");
       return false;
     }
+    console.log("User was found by email.");
     return true;
   };
 }
