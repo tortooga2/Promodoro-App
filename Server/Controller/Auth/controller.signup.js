@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import bycrypt from "bcrypt";
 import { z } from "zod";
 import { signUpSchema } from "../../Schema/schema.loginInfo.js";
+import {createTag} from "../Project/controller.tags.js";
 
 //infoJSON should have the fallowing properties: username, password, email
 const saltRounds = 10;
@@ -38,6 +39,8 @@ class SignUpController {
         if (err) throw err;
         console.log("User Created");
       });
+    await createTag(newUser.userID);
+    
   };
 
   isUserCreatedbyUsername = async (username, client) => {
