@@ -2,11 +2,11 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import bycrypt from "bcrypt";
 
-import JWTController from "./controller.jwt.js";
-
+// import JWTController from "./controller.jwt.js";
+import {createJWT} from "./controller.jwt.js";
 class LoginController {
   constructor() {
-    this.JWTController = new JWTController({ secret: process.env.JWT_SECRET });
+    //this.JWTController = new JWTController({ secret: process.env.JWT_SECRET });
   }
 
   usernameLogin = async (loginInfo, client) => {
@@ -24,7 +24,7 @@ class LoginController {
       let result = await bycrypt.compare(password, user.password);
       if (result) {
         console.log("User login was varified by Bcrypt");
-        return this.JWTController.createJWT({ clientID: user.userID });
+        return createJWT({ clientID: user.userID });
       }
       return null;
     }
