@@ -6,8 +6,11 @@ import {
   getClient,
   checkConnection,
 } from "./Controller/controller.mdb.js";
+
+
 import signUpRouter from "./Modules/module.signup.js";
 import loginRouter from "./Modules/module.login.js";
+import tagsRouter from "./Modules/module.tags.js";
 
 dotenv.config();
 
@@ -32,6 +35,7 @@ app.get("/", (req, res) => {
 //ENDPOINTS//
 app.use("/signup", signUpRouter);
 app.use("/login", loginRouter);
+app.use("/tags", tagsRouter);
 
 const RunningCallback = () => {
   console.log(`Server Running on Port ${process.env.PORT}`);
