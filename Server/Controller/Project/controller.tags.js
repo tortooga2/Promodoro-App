@@ -22,9 +22,18 @@ const getTags = async (mongoClient, clientID) => {
 
 const addTag = async (mongoClient, clientID, tag) => {
     let tags = await getTags(mongoClient, clientID);
-    tags.push(tag);
-    tags = [...new Set(tags)];
-    await monogClient.db(process.env.MONGO_USER_DB).collection('tags').updateOne({clientID: clientID}, {$set: {tags: tags}});
+    // tags.push(tag);
+    // tags = [...new Set(tags)];
+    for (let i = 0; i < tags.length; i++) {
+        if (tags[i].name == tag.name) {
+            tags[i].color = tag.color;
+            break;
+        }
+        else{
+            tags.push(tag);
+        }
+    }
+    await mongoClient.db(process.env.MONGO_USER_DB).collection('tags').updateOne({clientID: clientID}, {$set: {tags: tags}});
 };
 
 export {createTags, getTags, addTag}
